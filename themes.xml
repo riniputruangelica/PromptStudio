@@ -1,0 +1,7 @@
+<resources>
+    <style name="Theme.PromptStudio" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="android:fontFamily">sans</item>
+        <item name="android:windowActionModeOverlay">true</item>
+        <item name="android:colorAccent">#7C3AED</item>
+    </style>
+</resources>

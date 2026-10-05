@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#111827">
+<link rel="manifest" href="manifest.json">
+<title>Prompt Studio PRO — AI Prompt Generator</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#0b1020;color:#f8fafc}
+.app{max-width:1100px;margin:auto;padding:18px}.hero{padding:22px 4px}.hero h1{margin:0;font-size:30px}.hero p{color:#aab4c8;margin:7px 0}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 16px}.tab,button,select,input,textarea{font:inherit}.tab,button{border:0;border-radius:12px;padding:11px 14px;cursor:pointer}.tab{background:#1b2438;color:#cbd5e1}.tab.active,button.primary{background:#7c3aed;color:white}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.card{background:#111827;border:1px solid #263248;border-radius:18px;padding:16px}.card h2{font-size:17px;margin:0 0 12px}
+label{display:block;color:#cbd5e1;font-size:13px;margin:10px 0 6px}input,select,textarea{width:100%;background:#0b1220;color:white;border:1px solid #334155;border-radius:10px;padding:10px;outline:none}textarea{min-height:100px;resize:vertical}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.checks{display:flex;gap:8px;flex-wrap:wrap}.chip{background:#1e293b;padding:8px 10px;border-radius:999px;cursor:pointer;font-size:13px}.chip input{width:auto}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.output{min-height:280px}.history{display:grid;gap:8px}.item{padding:10px;background:#0b1220;border-radius:10px;border:1px solid #263248}.item small{color:#94a3b8}.danger{background:#7f1d1d;color:#fff}.muted{color:#94a3b8;font-size:12px}
+@media(max-width:760px){.grid{grid-template-columns:1fr}.row{grid-template-columns:1fr}.hero h1{font-size:25px}}
+</style>
+</head>
+<body>
+<div class="app">
+<section class="hero"><div style="display:inline-block;padding:6px 10px;border-radius:999px;background:#14532d;color:#bbf7d0;font-size:12px;margin-bottom:8px">✓ FREE MODE — TANPA API BERBAYAR</div><h1>✨ Prompt Studio FREE</h1><p>Generator prompt gambar & video yang berjalan langsung di perangkat. Tidak perlu login dan tidak memakai API berbayar.</p>
+<div class="card" style="margin-top:14px;padding:12px"><b>🚀 Cara cepat:</b> pilih kategori → isi produk/adegan → pilih Gambar atau Video → Generate → Copy.</div>
+<div class="tabs" style="margin-top:12px">
+<button class="tab" onclick="preset('product')">🛍️ Produk</button>
+<button class="tab" onclick="preset('fashion')">👗 Fashion</button>
+<button class="tab" onclick="preset('ugc')">📱 UGC</button>
+<button class="tab" onclick="preset('cinematic')">🎬 Cinematic</button>
+<button class="tab" onclick="preset('beauty')">✨ Beauty</button>
+</div></section>
+<div class="tabs">
+<button class="tab active" data-mode="image">🖼️ Prompt Gambar</button>
+<button class="tab" data-mode="video">🎬 Prompt Video</button>
+</div>
+
+<div class="grid">
+<div class="card">
+<h2>1. Konsep</h2>
+<label>Produk / objek / adegan</label><input id="subject" placeholder="Contoh: tas wanita warna cokelat">
+<label>Tujuan</label><select id="goal">
+<option>konten promosi</option><option>product review</option><option>iklan marketplace</option><option>konten TikTok/Reels</option><option>foto fashion</option><option>storytelling</option>
+</select>
+<label>Gaya visual</label><select id="style">
+<option>photorealistic premium</option><option>cinematic luxury</option><option>minimalist aesthetic</option><option>fashion editorial</option><option>commercial advertising</option><option>soft natural lifestyle</option><option>studio product photography</option><option>anime cinematic</option>
+</select>
+<label>Suasana</label><input id="mood" value="elegan, natural, premium">
+<label>Background</label><input id="bg" value="background bersih dan estetik">
+</div>
+
+<div class="card">
+<h2>2. Detail Visual</h2>
+<div class="row">
+<div><label>Rasio</label><select id="ratio"><option>9:16 vertical</option><option>1:1 square</option><option>16:9 horizontal</option><option>4:5 portrait</option></select></div>
+<div><label>Kualitas</label><select id="quality"><option>ultra detailed, 4K</option><option>high detail, 8K</option><option>clean commercial quality</option></select></div>
+</div>
+<label>Pencahayaan</label><select id="light"><option>soft natural light</option><option>golden hour</option><option>dramatic studio lighting</option><option>bright commercial lighting</option><option>moody cinematic lighting</option></select>
+<label>Komposisi</label><select id="composition"><option>professional balanced composition</option><option>close-up hero shot</option><option>medium shot</option><option>wide establishing shot</option><option>rule of thirds</option></select>
+<label>Warna</label><input id="color" value="warm neutral tones, realistic colors">
+</div>
+
+<div class="card">
+<h2>3. Model & Pose</h2>
+<label>Model</label><select id="model"><option>tanpa model</option><option>wanita dewasa</option><option>pria dewasa</option><option>model fashion dewasa</option></select>
+<label>Pose / aksi</label><input id="pose" value="pose natural dan percaya diri">
+<label>Outfit</label><input id="outfit" placeholder="Contoh: blouse putih dan rok mini hitam">
+<label>Ekspresi</label><input id="expression" value="natural, confident, friendly">
+</div>
+
+<div class="card">
+<h2>4. Kamera</h2>
+<div class="row">
+<div><label>Shot</label><select id="shot"><option>hero product shot</option><option>close-up</option><option>medium shot</option><option>full body</option><option>over-the-shoulder</option></select></div>
+<div><label>Lensa</label><select id="lens"><option>50mm</option><option>35mm</option><option>85mm portrait lens</option><option>24mm wide angle</option></select></div>
+</div>
+<label>Camera movement (video)</label><select id="movement"><option>slow push-in</option><option>smooth dolly forward</option><option>slow pan left to right</option><option>orbit around subject</option><option>handheld natural movement</option></select>
+<label>Durasi (video)</label><select id="duration"><option>5 seconds</option><option selected>10 seconds</option><option>15 seconds</option><option>30 seconds</option></select>
+</div>
+
+<div class="card">
+<h2>5. Teks & CTA</h2>
+<label>Headline di visual</label><input id="headline" placeholder="Contoh: Simple, elegan, wajib punya">
+<label>CTA</label><input id="cta" value="Cek sekarang dan pilih favoritmu">
+<label>Dialog / voice-over</label><textarea id="dialog" placeholder="Contoh: 'Aku suka banget karena tampilannya simpel tapi tetap elegan.'"></textarea>
+<label>Tambahan instruksi</label><textarea id="extra" placeholder="Tambahkan detail khusus jika ada..."></textarea>
+</div>
+
+<div class="card">
+<h2>6. Negative Prompt</h2>
+<textarea id="negative">blurry, low quality, low resolution, distorted face, deformed hands, extra fingers, missing fingers, duplicate objects, bad anatomy, unnatural skin, watermark, logo, random text, oversaturated, artifacts</textarea>
+<div class="actions">
+<button class="primary" id="generate">✨ Generate Prompt</button>
+<button id="random">🎲 Isi Otomatis</button>
+<button id="clear">↺ Reset</button>
+</div>
+</div>
+
+<div class="card" style="grid-column:1/-1">
+<h2>📋 Hasil Prompt</h2>
+<textarea id="output" class="output" placeholder="Prompt akan muncul di sini..."></textarea>
+<div class="actions">
+<button class="primary" id="copy">📋 Copy Prompt</button>
+<button id="save">❤️ Simpan Favorit</button>
+<button id="download">⬇️ Simpan TXT</button>
+</div>
+<p class="muted">Prompt dibuat agar mudah ditempel ke berbagai AI gambar/video. Untuk hasil terbaik, sesuaikan detail dengan platform yang kamu gunakan.</p>
+</div>
+
+<div class="card" style="grid-column:1/-1">
+<h2>❤️ Favorit & Riwayat</h2>
+<div id="history" class="history"></div>
+<button class="danger" id="clearHistory" style="margin-top:10px">Hapus semua</button>
+</div>
+</div>
+</div>
+<script>
+let mode='image';
+const $=id=>document.getElementById(id);
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');mode=b.dataset.mode;generate()});
+function val(id){return $(id).value.trim()}
+function generate(){
+ const s=val('subject')||'subjek utama yang menarik';
+ let p=`Create a ${val('style')} ${mode==='video'?'video':'image'} of ${s}. `;
+ p+=`Purpose: ${val('goal')}. Mood: ${val('mood')}. Background: ${val('bg')}. `;
+ p+=`Subject presentation: ${val('pose')}. Model: ${val('model')}. Outfit: ${val('outfit')||'sesuai konsep dan terlihat premium'}. Expression: ${val('expression')}. `;
+ p+=`Lighting: ${val('light')}. Composition: ${val('composition')}. Shot: ${val('shot')}, ${val('lens')}. Color grading: ${val('color')}. `;
+ p+=`Quality: ${val('quality')}. Aspect ratio: ${val('ratio')}. `;
+ if(mode==='video') p+=`Duration: ${val('duration')}. Camera movement: ${val('movement')}. Natural realistic motion, smooth transitions, consistent subject identity, realistic physics, no sudden morphing. `;
+ if(val('headline')) p+=`On-screen text: "${val('headline')}". `;
+ if(val('cta')) p+=`CTA: "${val('cta')}". `;
+ if(val('dialog')) p+=`Natural dialogue/voice-over in Indonesian: "${val('dialog')}". `;
+ if(val('extra')) p+=`Additional instructions: ${val('extra')}. `;
+ p+=`Negative prompt: ${val('negative')}.`;
+ $('output').value=p;
+}
+function randomFill(){
+ const subjects=['tas wanita premium warna cokelat','parfum elegan dengan botol kaca','dress wanita warna hitam','sepatu sneakers putih','skincare dalam kemasan minimalis'];
+ const poses=['pose natural dan percaya diri','berjalan santai sambil melihat kamera','memegang produk dengan elegan','duduk santai dengan ekspresi natural'];
+ $('subject').value=subjects[Math.floor(Math.random()*subjects.length)];
+ $('pose').value=poses[Math.floor(Math.random()*poses.length)];
+ generate();
+}
+function save(){
+ const text=val('output'); if(!text)return;
+ let h=JSON.parse(localStorage.ps_history||'[]');h.unshift({t:new Date().toLocaleString('id-ID'),mode,text});h=h.slice(0,20);localStorage.ps_history=JSON.stringify(h);render();
+}
+function render(){
+ let h=JSON.parse(localStorage.ps_history||'[]');
+ $('history').innerHTML=h.length?h.map((x,i)=>`<div class="item"><small>${x.t} • ${x.mode}</small><div style="margin:5px 0">${x.text.slice(0,180)}${x.text.length>180?'…':''}</div><button onclick="loadItem(${i})">Gunakan</button></div>`).join(''):'<span class="muted">Belum ada prompt tersimpan.</span>';
+}
+window.loadItem=i=>{let h=JSON.parse(localStorage.ps_history||'[]');$('output').value=h[i].text};
+$('generate').onclick=generate;$('random').onclick=randomFill;$('copy').onclick=async()=>{await navigator.clipboard.writeText(val('output'));alert('Prompt berhasil dicopy!')};
+$('save').onclick=save;$('clear').onclick=()=>location.reload();$('clearHistory').onclick=()=>{localStorage.removeItem('ps_history');render()};
+$('download').onclick=()=>{let b=new Blob([val('output')],{type:'text/plain'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='prompt-studio.txt';a.click()};
+render();generate();
+if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
+
+<script>
+function preset(type){
+ const p={
+ product:{subject:'produk premium untuk iklan',goal:'iklan marketplace',style:'commercial advertising',mood:'clean, premium, trustworthy',bg:'minimalist studio background',pose:'produk menjadi hero utama',headline:'Premium quality, simple choice',cta:'Cek sekarang'},
+ fashion:{subject:'fashion outfit wanita dewasa',goal:'konten TikTok/Reels',style:'fashion editorial',mood:'confident, elegant, modern',bg:'city street aesthetic',pose:'berjalan natural dan percaya diri',outfit:'outfit fashion modern dengan rok mini',headline:'Your style, your story',cta:'Lihat koleksinya'},
+ ugc:{subject:'produk yang sedang direkomendasikan creator dewasa',goal:'product review',style:'soft natural lifestyle',mood:'friendly, authentic, relatable',bg:'kamar/cafe yang natural',pose:'memegang produk sambil berbicara ke kamera',headline:'Aku baru coba ini!',cta:'Cek produknya'},
+ cinematic:{subject:'adegan cinematic dramatis',goal:'storytelling',style:'cinematic luxury',mood:'dramatic, emotional, immersive',bg:'cinematic environment with depth',pose:'gerakan natural sesuai cerita',headline:'A moment worth remembering',cta:'Watch now'},
+ beauty:{subject:'produk beauty/skincare premium',goal:'konten promosi',style:'studio product photography',mood:'fresh, clean, luxurious',bg:'clean beauty studio',pose:'hero product close-up',headline:'Glow starts here',cta:'Coba sekarang'}
+ }[type];
+ Object.keys(p).forEach(k=>{if($(k))$(k).value=p[k]});
+ generate();
+}
+</script>
+</script>
+</body></html>
